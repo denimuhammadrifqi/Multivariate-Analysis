@@ -1,0 +1,28 @@
+> data<-read.csv(file.choose(), dec=";", header=T)
+> attach(data)
+The following objects are masked from data (pos = 3):
+
+x1, x2, x3, x4
+
+> summary(data)
+x1 x2 x3 x4
+Min. :17331 Min. :17196 Min. :12130 Min. :11765
+1st Qu.:20214 1st Qu.:19848 1st Qu.:16857 1st Qu.:16655
+Median :23243 Median :22734 Median :17774 Median :17423
+Mean :22889 Mean :22454 Mean :17909 Mean :17523
+3rd Qu.:25802 3rd Qu.:25333 3rd Qu.:19407 3rd Qu.:18860
+Max. :27656 Max. :26976 Max. :23276 Max. :22791
+> data
+x1 x2 x3 x4
+1 17331 17196 12130 11765
+2 27656 26976 23276 22791
+3 22379 21805 17335 17073
+
+4 19492 19195 16697 16516
+5 24107 23663 19805 19222
+6 26367 25890 18212 17772
+>
+> #x1=Pria 2019
+> #x2=Pria 2018
+> #x3=Wanita 2019
+> #x4=Wanita 2018
