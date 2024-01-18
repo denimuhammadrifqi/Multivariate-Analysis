@@ -1,0 +1,70 @@
+> install.packages("mvnormtest")
+Warning: package ‘mvnormtest’ is in use and will not be installed
+> library(mvnormtest)
+> data<-read.csv(file.choose(), sep=",", dec=".", header=TRUE)
+> data
+X1 X2 X3 X4
+1 15218 14428 8607 8305
+2 13254 12794 6744 6457
+3 11938 11487 5171 4842
+4 14166 13819 9224 9006
+5 11609 10782 4464 4248
+6 12024 11565 5462 5227
+7 14535 13972 6538 6329
+8 14343 13789 6851 6543
+9 16099 15609 5546 5261
+10 14349 13811 6467 6278
+11 13828 13406 9916 9694
+12 14948 14349 7439 7035
+13 15157 14818 8631 8457
+14 18016 17223 7601 7427
+
+15 15944 15279 9565 8987
+16 17380 16827 8601 8166
+17 13326 12987 7410 6947
+18 17617 16993 9771 9371
+19 15557 14733 10400 9876
+20 22996 22072 16390 15833
+> attach(data)
+> summary(data)
+X1 X2 X3 X4
+Min. :11609 Min. :10782 Min. : 4464 Min. : 4248
+1st Qu.:13702 1st Qu.:13301 1st Qu.: 6520 1st Qu.: 6316
+Median :14742 Median :14160 Median : 7520 Median : 7231
+Mean :15115 Mean :14537 Mean : 8040 Mean : 7714
+3rd Qu.:15983 3rd Qu.:15362 3rd Qu.: 9309 3rd Qu.: 8992
+Max. :22996 Max. :22072 Max. :16390 Max. :15833
+>
+> ##=========QQ PLOT MAHALANOBIS=========##
+> y<-as.matrix(data)
+> z<-t(y)
+> mu<-colMeans(y)
+> n<-nrow(y)
+> p<-ncol(y)
+> cov<-cov(y)
+> d<-sort(mahalanobis(y,mu,cov))
+> j<-qchisq(ppoints(n),df=p)
+> qqplot(j,d,main="QQ-Plot",ylab="Jarak Mahalanobis")
+> abline(0,1)
+>
+> ##===========SHAPIRO WILKS==========##
+> mshapiro.test(z)
+
+Shapiro-Wilk normality test
+
+data: Z
+W = 0.83366, p-value = 0.002873
+>
+> ##========KOLMOGOROV SMIRNOV=======##
+> ks.test(data,"pnorm")
+
+One-sample Kolmogorov-Smirnov test
+
+data: data
+D = 1, p-value < 2.2e-16
+alternative hypothesis: two-sided
+
+Warning message:
+In ks.test(data, "pnorm") :
+ties should not be present for the Kolmogorov-Smirnov test
+> #Tidak dapat menggunakan uji kolmogorov smirnov karena n(20)<50
